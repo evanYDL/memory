@@ -25,14 +25,10 @@ import { RealtimeClient } from "@/app/agentConfigs/realtimeClient";
 // Agent configs
 import { allAgentSets, defaultAgentSetKey } from "@/app/agentConfigs";
 // New SDK scenarios
-import { simpleHandoffScenario } from "@/app/agentConfigs/simpleHandoff";
-import { customerServiceRetailScenario } from "@/app/agentConfigs/customerServiceRetail";
-import { chatSupervisorScenario } from "@/app/agentConfigs/chatSupervisor";
+import { dementiaCompanionScenario } from "@/app/agentConfigs/dementiaCompanion";
 
 const sdkScenarioMap: Record<string, RealtimeAgent[]> = {
-  simpleHandoff: simpleHandoffScenario,
-  customerServiceRetail: customerServiceRetailScenario,
-  chatSupervisor: chatSupervisorScenario,
+  dementiaCompanion: dementiaCompanionScenario,
 };
 
 import useAudioDownload from "./hooks/useAudioDownload";
@@ -114,6 +110,7 @@ function App() {
     }
 
     try {
+      logClientEvent(eventObj, eventNameSuffix);
       sdkClientRef.current.sendEvent(eventObj);
     } catch (err) {
       console.error('Failed to send via SDK', err);
