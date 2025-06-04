@@ -1,7 +1,7 @@
 import { simpleHandoffScenario } from './simpleHandoff';
 import { customerServiceRetailScenario } from './customerServiceRetail';
 import { chatSupervisorScenario } from './chatSupervisor';
-import { dementiaCompanionScenario } from './dementiaCompanion';
+import { dementiaCompanionScenario } from './demetiaCompanion';
 
 import type { RealtimeAgent } from '@openai/agents/realtime';
 
