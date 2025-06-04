@@ -25,14 +25,10 @@ import { RealtimeClient } from "@/app/agentConfigs/realtimeClient";
 // Agent configs
 import { allAgentSets, defaultAgentSetKey } from "@/app/agentConfigs";
 // New SDK scenarios
-import { simpleHandoffScenario } from "@/app/agentConfigs/simpleHandoff";
-import { customerServiceRetailScenario } from "@/app/agentConfigs/customerServiceRetail";
-import { chatSupervisorScenario } from "@/app/agentConfigs/chatSupervisor";
+import { dementiaCompanionScenario } from "@/app/agentConfigs/dementiaCompanion";
 
 const sdkScenarioMap: Record<string, RealtimeAgent[]> = {
-  simpleHandoff: simpleHandoffScenario,
-  customerServiceRetail: customerServiceRetailScenario,
-  chatSupervisor: chatSupervisorScenario,
+  dementiaCompanion: dementiaCompanionScenario,
 };
 
 import useAudioDownload from "./hooks/useAudioDownload";
@@ -114,6 +110,7 @@ function App() {
     }
 
     try {
+      logClientEvent(eventObj, eventNameSuffix);
       sdkClientRef.current.sendEvent(eventObj);
     } catch (err) {
       console.error('Failed to send via SDK', err);
@@ -184,7 +181,8 @@ function App() {
   };
 
   const connectToRealtime = async () => {
-    const agentSetKey = searchParams.get("agentConfig") || "default";
+    const agentSetKey =
+      searchParams.get("agentConfig") || defaultAgentSetKey;
     if (sdkScenarioMap[agentSetKey]) {
       // Use new SDK path
       if (sessionStatus !== "DISCONNECTED") return;
@@ -799,7 +797,7 @@ function App() {
     };
   }, [sessionStatus]);
 
-  const agentSetKey = searchParams.get("agentConfig") || "default";
+  const agentSetKey = searchParams.get("agentConfig") || defaultAgentSetKey;
 
   return (
     <div className="text-base flex flex-col h-screen bg-gray-100 text-gray-800 relative">
